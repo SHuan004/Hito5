@@ -8,9 +8,11 @@ import { Lotes } from "../models/lotes.model";
 import { MovimientosInventario } from "../models/movimientosInventario.model";
 
 // Reemplaza la URL por la de tu base de datos:
-const DATABASE_URL = "postgres://postgres:root@localhost:5436/db_Hito5";
+const DATABASE =
+  process.env.DATABASE_URL ||
+  "postgres://postgres:root@localhost:5436/db_Hito5";
 
-export const sequelize = new Sequelize(DATABASE_URL, {
+export const sequelize = new Sequelize(DATABASE, {
   dialect: "postgres",
   models: [TiposUsuario, Usuarios, Medicamentos, Lotes, MovimientosInventario],
 });

@@ -1,73 +1,51 @@
 import {
-  Table,
   Model,
   Column,
   DataType,
   PrimaryKey,
-  AllowNull,
-  Unique,
-  ForeignKey,
-  BelongsTo,
   IsUUID,
   Default,
   BeforeCreate,
   BeforeUpdate,
+  Table,
 } from "sequelize-typescript";
 import bcrypt from "bcryptjs";
-
-import { TiposUsuario } from "./tiposUsuario.models";
 import { UsuariosAttributes } from "../interfaces/usuarios.interface";
 
-@Table({
-  tableName: "usuarios",
-  timestamps: false,
-})
+@Table({ tableName: "usuarios", timestamps: false })
 export class Usuarios extends Model<UsuariosAttributes> {
   @IsUUID(4)
   @PrimaryKey
   @Default(DataType.UUIDV4)
   @Column(DataType.UUID)
-  id_usuario!: string;
+  declare id_usuario: string;
 
-  @AllowNull(false)
-  @Column(DataType.STRING(20))
-  rut!: string;
+  @Column(DataType.STRING)
+  declare rut: string;
 
-  @AllowNull(false)
-  @Column(DataType.STRING(50))
-  username!: string;
+  @Column(DataType.STRING)
+  declare username: string;
 
-  @AllowNull(false)
-  @Column(DataType.STRING(50))
-  nombre!: string;
+  @Column(DataType.STRING)
+  declare nombre: string;
 
-  @AllowNull(false)
-  @Column(DataType.STRING(50))
-  apellido!: string;
+  @Column(DataType.STRING)
+  declare apellido: string;
 
-  @AllowNull(false)
-  @Unique
-  @Column(DataType.STRING(100))
-  email!: string;
+  @Column(DataType.STRING)
+  declare email: string;
 
-  @AllowNull(false)
-  @Column(DataType.STRING(255))
-  password!: string;
+  @Column(DataType.STRING)
+  declare password: string;
 
-  @IsUUID(4)
-  @ForeignKey(() => TiposUsuario)
-  @AllowNull(false)
-  @Column(DataType.UUID)
-  id_tipo_usuario!: string;
+  @Column(DataType.STRING)
+  declare id_tipo_usuario: string;
 
-  @BelongsTo(() => TiposUsuario)
-  tipo_usuario!: TiposUsuario;
-
-  // HOOKS para encriptar la contraseña antes de crear/actualizar
   @BeforeCreate
   @BeforeUpdate
   static async hashPassword(usuario: Usuarios) {
     if (usuario.password) {
+      console.log("Hashing password for:", usuario.email);
       usuario.password = await bcrypt.hash(usuario.password, 10);
     }
   }

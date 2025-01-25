@@ -6,6 +6,8 @@ import { UsuariosAttributes } from "../interfaces/usuarios.interface";
  * Crear un nuevo usuario
  */
 export const createUser = async (userData: UsuariosAttributes) => {
+  console.log("Creando usuario:", userData.email);
+  console.log("Contraseña", userData.password);
   const nuevoUsuario = await Usuarios.create(userData);
   return nuevoUsuario;
 };

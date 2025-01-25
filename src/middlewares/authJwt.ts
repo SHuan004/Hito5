@@ -16,7 +16,6 @@ export const verifyToken = (
   try {
     let token = req.headers["authorization"];
     if (!token) {
-      // Invocamos res... y luego hacemos return; sin devolver el objeto
       res.status(403).json({ message: "No token provided!" });
       return;
     }
@@ -28,7 +27,6 @@ export const verifyToken = (
     const secret = process.env.JWT_SECRET || "MiSecreto";
     const decoded = jwt.verify(token, secret) as DecodedToken;
 
-    // Almacena la info en req para uso posterior
     (req as any).userId = decoded.uid;
     next();
   } catch (err) {
