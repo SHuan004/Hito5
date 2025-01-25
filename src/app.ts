@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from "express";
 import { usuariosRouter } from "./routes/usuarios.routes";
 import { authRouter } from "./routes/auth.routes";
+import { tiposUsuarioRouter } from "./routes/tiposUsuario.routes";
 import dotenv from "dotenv";
 
 const app = express();
@@ -10,6 +11,7 @@ dotenv.config();
 // Rutas
 app.use("/api/usuarios", usuariosRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/tipos", tiposUsuarioRouter);
 
 // Middleware global de manejo de errores
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {

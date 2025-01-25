@@ -67,5 +67,5 @@ interface Payload {
  */
 const generarToken = (payload: Payload): string => {
   const secret = process.env.JWT_SECRET || "MiSecreto";
-  return jwt.sign(payload, secret, { expiresIn: "1d" });
+  return jwt.sign(payload, secret, { expiresIn: "1h" });
 };
