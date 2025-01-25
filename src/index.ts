@@ -6,7 +6,7 @@ const PORT = 3000;
 const main = async () => {
   try {
     // Sincronizar con la BD
-    await sequelize.sync({ force: true });
+    await sequelize.sync();
     console.log("Database connected");
 
     // Iniciar servidor
