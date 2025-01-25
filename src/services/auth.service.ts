@@ -8,7 +8,7 @@ import bcrypt from "bcryptjs";
  * Registro de un nuevo usuario, valida si ya existe y genera un token JWT.
  */
 export const signupUser = async (userData: UsuariosAttributes) => {
-  const { rut, email, username, password } = userData;
+  const { rut, email, username } = userData;
 
   // Verificar si el usuario ya existe
   const existe = await findExistingUser(rut, email, username);
