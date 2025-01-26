@@ -5,6 +5,7 @@ import {
   createLote,
   updateLote,
   deleteLote,
+  getLotesPorVencer,
 } from "../services/lotes.service";
 
 /**
@@ -102,10 +103,29 @@ const remove = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+const getLotesPorVencerController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const dias = parseInt(req.query.dias as string, 10) || 30;
+    const lotes = await getLotesPorVencer(dias);
+    if (lotes.length === 0) {
+      res.status(404).json({ ok: false, message: "No hay lotes por vencer." });
+      return;
+    }
+    res.json({ ok: true, data: lotes });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const LotesController = {
   getAll,
   getById,
   create,
   update,
   remove,
+  getLotesPorVencerController,
 };

@@ -4,6 +4,11 @@ import { verifyToken } from "../middlewares/authJwt";
 
 export const lotesRouter = Router();
 
+lotesRouter.get(
+  "/por-vencer",
+  verifyToken,
+  LotesController.getLotesPorVencerController
+);
 lotesRouter.get("/", verifyToken, LotesController.getAll);
 lotesRouter.get("/:id", verifyToken, LotesController.getById);
 lotesRouter.post("/", verifyToken, LotesController.create);

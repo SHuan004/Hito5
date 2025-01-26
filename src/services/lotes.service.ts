@@ -1,5 +1,6 @@
 import { Lotes } from "../models/lotes.model";
 import { LotesAttributes } from "../interfaces/lotes.interface";
+import { Op } from "sequelize";
 
 /**
  * Obtener todos los lotes
@@ -58,4 +59,19 @@ export const deleteLote = async (id: string) => {
 
   await lote.destroy();
   return lote;
+};
+
+export const getLotesPorVencer = async (dias: number = 30) => {
+  const hoy = new Date();
+  const fechaLimite = new Date();
+  fechaLimite.setDate(hoy.getDate() + dias);
+
+  return await Lotes.findAll({
+    where: {
+      fecha_vencimiento: {
+        [Op.between]: [hoy, fechaLimite],
+      },
+    },
+    include: ["medicamento"],
+  });
 };
