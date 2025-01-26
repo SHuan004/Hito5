@@ -45,7 +45,6 @@ export class Usuarios extends Model<UsuariosAttributes> {
   @BeforeUpdate
   static async hashPassword(usuario: Usuarios) {
     if (usuario.password) {
-      console.log("Hashing password for:", usuario.email);
       usuario.password = await bcrypt.hash(usuario.password, 10);
     }
   }

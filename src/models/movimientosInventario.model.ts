@@ -4,13 +4,12 @@ import {
   Column,
   DataType,
   PrimaryKey,
-  AllowNull,
   ForeignKey,
   BelongsTo,
   IsUUID,
   Default,
+  AllowNull,
 } from "sequelize-typescript";
-
 import { Lotes } from "./lotes.model";
 import { Usuarios } from "./usuarios.model";
 import { MovimientosInventarioAttributes } from "../interfaces/movimientosInventario.interface";
@@ -24,43 +23,43 @@ export class MovimientosInventario extends Model<MovimientosInventarioAttributes
   @PrimaryKey
   @Default(DataType.UUIDV4)
   @Column(DataType.UUID)
-  id_movimiento!: string;
+  declare id_movimiento: string;
 
   @IsUUID(4)
   @ForeignKey(() => Lotes)
   @AllowNull(false)
   @Column(DataType.UUID)
-  id_lote!: string;
+  declare id_lote: string;
 
   @BelongsTo(() => Lotes)
-  lote!: Lotes;
+  declare lote: Lotes;
 
   @AllowNull(false)
-  @Column(DataType.DATE)
-  fecha_movimiento!: Date;
-
-  @AllowNull(false)
-  @Column(DataType.STRING(20))
-  tipo_movimiento!: string;
+  @Column(DataType.STRING)
+  declare tipo_movimiento: string;
 
   @AllowNull(false)
   @Column(DataType.INTEGER)
-  cantidad!: number;
+  declare cantidad: number;
+
+  @AllowNull(false)
+  @Column(DataType.STRING)
+  declare fecha_movimiento: string;
 
   @IsUUID(4)
   @ForeignKey(() => Usuarios)
   @AllowNull(false)
   @Column(DataType.UUID)
-  id_usuario!: string;
+  declare id_usuario: string;
 
   @BelongsTo(() => Usuarios)
-  usuario!: Usuarios;
+  declare usuario: Usuarios;
 
   @AllowNull(false)
   @Column(DataType.STRING(20))
-  rut_usuario!: string;
+  declare rut_usuario: string;
 
   @AllowNull(false)
   @Column(DataType.STRING(50))
-  username_usuario!: string;
+  declare username_usuario: string;
 }

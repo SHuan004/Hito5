@@ -13,42 +13,39 @@ import {
 import { Medicamentos } from "./medicamentos.models";
 import { LotesAttributes } from "../interfaces/lotes.interface";
 
-@Table({
-  tableName: "lotes",
-  timestamps: false,
-})
+@Table({ tableName: "lotes", timestamps: false })
 export class Lotes extends Model<LotesAttributes> {
   @IsUUID(4)
   @PrimaryKey
   @Default(DataType.UUIDV4)
   @Column(DataType.UUID)
-  id_lote!: string;
+  declare id_lote: string;
 
   @IsUUID(4)
   @ForeignKey(() => Medicamentos)
   @AllowNull(false)
   @Column(DataType.UUID)
-  id_medicamento!: string;
+  declare id_medicamento: string;
 
   @BelongsTo(() => Medicamentos)
-  medicamento!: Medicamentos;
+  declare medicamento: Medicamentos;
 
   @Column(DataType.STRING(50))
-  codigo_lote?: string;
+  declare codigo_lote?: string;
 
   @AllowNull(false)
   @Column(DataType.DATE)
-  fecha_vencimiento!: Date;
+  declare fecha_vencimiento: Date;
 
   @AllowNull(false)
   @Column(DataType.INTEGER)
-  cantidad_cajas!: number;
+  declare cantidad_cajas: number;
 
   @AllowNull(false)
   @Column(DataType.INTEGER)
-  unidades_por_caja!: number;
+  declare unidades_por_caja: number;
 
   @AllowNull(false)
   @Column(DataType.INTEGER)
-  stock_actual!: number;
+  declare stock_actual: number;
 }

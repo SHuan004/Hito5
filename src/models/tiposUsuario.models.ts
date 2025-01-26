@@ -4,9 +4,9 @@ import {
   Column,
   DataType,
   PrimaryKey,
-  AllowNull,
   IsUUID,
   Default,
+  AllowNull,
 } from "sequelize-typescript";
 import { TiposUsuarioAttributes } from "../interfaces/tiposUsuario.interface";
 
@@ -19,9 +19,9 @@ export class TiposUsuario extends Model<TiposUsuarioAttributes> {
   @PrimaryKey
   @Default(DataType.UUIDV4)
   @Column(DataType.UUID)
-  id_tipo_usuario!: string;
+  declare id_tipo_usuario: string;
 
   @AllowNull(false)
   @Column(DataType.STRING(50))
-  nombre!: string;
+  declare nombre: string;
 }
