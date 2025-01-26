@@ -1,4 +1,4 @@
-# README: Proyecto API REST con Implementación de JWT
+# HITO 5: Proyecto API REST con Implementación de JWT
 
 ## Descripción del Proyecto
 
