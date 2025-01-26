@@ -6,7 +6,7 @@ import { signupSchema, signinSchema } from "../validators/auth.validator";
 export const authRouter = Router();
 
 // Registro: usamos validateBody con signupSchema
-authRouter.post("/signup", validateBody(signupSchema), AuthController.signup);
+authRouter.post("/register", validateBody(signupSchema), AuthController.signup);
 
 // Login: usamos validateBody con signinSchema
-authRouter.post("/signin", validateBody(signinSchema), AuthController.signin);
+authRouter.post("/login", validateBody(signinSchema), AuthController.signin);
