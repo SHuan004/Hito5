@@ -110,11 +110,15 @@ La API estará disponible en: `http://localhost:3000`
 
 - **Nota:** Todos los endpoints de este CRUD requieren un token JWT en el encabezado `Authorization`:
 
+  ```
+  Authorization: Bearer <token>
+  ```
+
 - **Crear (`POST /tipos-usuario`):**
 
   ```json
   {
-    "nombre": "Bodeguero"
+    "nombre": "Administrador"
   }
   ```
 
@@ -125,7 +129,7 @@ La API estará disponible en: `http://localhost:3000`
   [
     {
       "id_tipo_usuario": "12345",
-      "nombre": "Bodeguero"
+      "nombre": "Administrador"
     }
   ]
   ```
@@ -136,7 +140,7 @@ La API estará disponible en: `http://localhost:3000`
   ```json
   {
     "id_tipo_usuario": "12345",
-    "nombre": "Bodeguero"
+    "nombre": "Administrador"
   }
   ```
 
@@ -216,6 +220,147 @@ La API estará disponible en: `http://localhost:3000`
   ```json
   {
     "message": "Medicamento eliminado."
+  }
+  ```
+
+### **CRUD: Lotes**
+
+- **Nota:** Todos los endpoints de este CRUD requieren un token JWT en el encabezado `Authorization`:
+
+  ```
+  Authorization: Bearer <token>
+  ```
+
+- **Crear (`POST /lotes`):**
+
+  ```json
+  {
+    "id_medicamento": "12345",
+    "codigo_lote": "L001",
+    "fecha_vencimiento": "2025-12-31",
+    "cantidad_cajas": 50,
+    "unidades_por_caja": 20,
+    "stock_actual": 1000
+  }
+  ```
+
+- **Leer Todos (`GET /lotes`):**
+  Respuesta:
+
+  ```json
+  [
+    {
+      "id_lote": "67890",
+      "id_medicamento": "12345",
+      "codigo_lote": "L001",
+      "fecha_vencimiento": "2025-12-31",
+      "cantidad_cajas": 50,
+      "unidades_por_caja": 20,
+      "stock_actual": 1000
+    }
+  ]
+  ```
+
+- **Leer por ID (`GET /lotes/:id`):**
+  Respuesta:
+
+  ```json
+  {
+    "id_lote": "67890",
+    "id_medicamento": "12345",
+    "codigo_lote": "L001",
+    "fecha_vencimiento": "2025-12-31",
+    "cantidad_cajas": 50,
+    "unidades_por_caja": 20,
+    "stock_actual": 1000
+  }
+  ```
+
+- **Actualizar (`PUT /lotes/:id`):**
+
+  ```json
+  {
+    "stock_actual": 900
+  }
+  ```
+
+- **Eliminar (`DELETE /lotes/:id`):**
+  Respuesta:
+  ```json
+  {
+    "message": "Lote eliminado."
+  }
+  ```
+
+### **CRUD: MovimientosInventario**
+
+- **Nota:** Todos los endpoints de este CRUD requieren un token JWT en el encabezado `Authorization`:
+
+  ```
+  Authorization: Bearer <token>
+  ```
+
+- **Crear (`POST /movimientos-inventario`):**
+
+  ```json
+  {
+    "id_lote": "67890",
+    "fecha_movimiento": "2025-01-25",
+    "tipo_movimiento": "INGRESO",
+    "cantidad": 200,
+    "id_usuario": "54321",
+    "rut_usuario": "12345678-9",
+    "username_usuario": "usuario123"
+  }
+  ```
+
+- **Leer Todos (`GET /movimientos-inventario`):**
+  Respuesta:
+
+  ```json
+  [
+    {
+      "id_movimiento": "11111",
+      "id_lote": "67890",
+      "fecha_movimiento": "2025-01-25",
+      "tipo_movimiento": "INGRESO",
+      "cantidad": 200,
+      "id_usuario": "54321",
+      "rut_usuario": "12345678-9",
+      "username_usuario": "usuario123"
+    }
+  ]
+  ```
+
+- **Leer por ID (`GET /movimientos-inventario/:id`):**
+  Respuesta:
+
+  ```json
+  {
+    "id_movimiento": "11111",
+    "id_lote": "67890",
+    "fecha_movimiento": "2025-01-25",
+    "tipo_movimiento": "INGRESO",
+    "cantidad": 200,
+    "id_usuario": "54321",
+    "rut_usuario": "12345678-9",
+    "username_usuario": "usuario123"
+  }
+  ```
+
+- **Actualizar (`PUT /movimientos-inventario/:id`):**
+
+  ```json
+  {
+    "cantidad": 250
+  }
+  ```
+
+- **Eliminar (`DELETE /movimientos-inventario/:id`):**
+  Respuesta:
+  ```json
+  {
+    "message": "Movimiento de inventario eliminado."
   }
   ```
 
